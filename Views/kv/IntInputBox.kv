@@ -1,0 +1,14 @@
+[IntInputBox@BoxLayout]
+    size_hint_x: ctx.size_x
+    size_hint_y: ctx.size_y
+    orientation: 'horizontal'
+    Label:
+        text: ctx.text
+        text_size: self.width, None
+        size: self.texture_size
+        size_hint_x: 0.3
+    TextInput:
+        multiline: False
+        input_filter: 'int'
+        id: value
+        text: ctx.val

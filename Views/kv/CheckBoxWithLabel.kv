@@ -1,0 +1,15 @@
+[CheckBoxWithLabel@BoxLayout]
+    size_hint_x: ctx.size_x
+    size_hint_y: ctx.size_y
+    orientation: 'horizontal'
+    CheckBox:
+        id: toggle
+        group: ctx.group_name
+        size_hint_x: 0.2
+        active: True
+    Label:
+        text: ctx.text
+        padding: (0, 0)
+        text_size: self.width, None
+        size_hint_x: 0.8
+        size: self.texture_size

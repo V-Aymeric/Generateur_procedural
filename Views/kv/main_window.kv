@@ -1,0 +1,90 @@
+<MainWindow>:
+    Screen:
+        BoxLayout:
+            orientation: 'horizontal'
+            size : root.size
+            spacing: 10
+            padding: 5
+            BoxLayout:
+                size_hint_x: 0.4
+                size_hint_y: 1
+                orientation: 'vertical'
+                Label:
+                    text: 'Methode de generation'
+                    size_hint_y: 1/10
+                    padding: (0, 0)
+                    text_size: self.width, None
+                    size: self.texture_size
+                CheckBoxWithLabel:
+                    id:perlin_method
+                    group_name:'method'
+                    size_x:1
+                    size_y:1/10
+                    text:'Perlin'
+                CheckBoxWithLabel:
+                    id:grammary_method
+                    group_name:'method'
+                    size_x:1
+                    size_y:1/10
+                    text:'Grammary'
+                CheckBoxWithLabel:
+                    id:poisson_method
+                    group_name:'method'
+                    size_x:1
+                    size_y:1/10
+                    text:'Poisson Points'
+
+                IntInputBox:
+                    id:ocean
+                    text:'Ocean'
+                    val:'40'
+                    size_x:1
+                    size_y:1/10
+                IntInputBox:
+                    id:beach
+                    text:'Plages'
+                    val:'5'
+                    size_x:1
+                    size_y:1/10
+                IntInputBox:
+                    id:plains
+                    text:'Plaines'
+                    val:'45'
+                    size_x:1
+                    size_y:1/10
+                IntInputBox:
+                    id:mountain
+                    text:'Montagnes'
+                    val:'10'
+                    size_x:1
+                    size_y:1/10
+
+                BoxLayout:
+                    size_hint_x: 1
+                    size_hint_y: 3/10
+                    orientation: 'vertical'
+                    IntInputBox:
+                        id:seed
+                        text:'Seed'
+                        val:''
+                        size_x:1
+                        size_y:1
+                    BoxLayout:
+                        size_hint_x: 1
+                        size_hint_y: 1
+                        orientation: 'horizontal'
+                        Label:
+                            text: 'Chemin'
+                            text_size: self.width, None
+                            size: self.texture_size
+                            size_hint_x: 0.3
+                        TextInput:
+                            multiline: False
+                            id: path
+                    Button:
+                        id: generate_button
+                        disabled: True
+                        text: 'GENERER'
+                        on_release: root.generate_file()
+            Image:
+                id: world_map
