@@ -2,6 +2,8 @@ import sys
 import os
 import time
 
+#TODO: Check why I made this file and where it is used
+
 grammary_dict = {
     "A": "ABAAABB",
     "B": "ABBAB",

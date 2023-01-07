@@ -1,6 +1,7 @@
 import noise
-import stats
+from Statistics import stats
 from Statistics.maths_functions import lambda_polynome
+from math import sqrt
 
 
 def calculate_perlin_values(coord_x=0, coord_y=0):

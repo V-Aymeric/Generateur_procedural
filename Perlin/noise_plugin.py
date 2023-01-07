@@ -1,5 +1,5 @@
 import noise
-import stats
+from Statistics import stats
 from Statistics.maths_functions import lambda_polynome
 
 from math import sqrt

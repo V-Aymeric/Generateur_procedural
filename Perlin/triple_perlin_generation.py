@@ -1,7 +1,3 @@
-import noise
-import stats
-
-
 class AdvancedGeneration:
     def __init__(self, p_humidity_values, p_elevation_values, p_temperature_values):
         self.humidity_values = p_humidity_values

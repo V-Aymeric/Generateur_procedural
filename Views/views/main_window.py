@@ -7,10 +7,16 @@ from Views.bitmap_generator import generate_image
 from Views.bitmap_generator import basic_image
 from Statistics.input_data import InputData
 from Statistics.input_data import PercentageKeys
-from generators import perlin_generator
-from generators import grammary_generator
-from generators import poisson_points_generator
-from generators import str_to_tab
+
+# from generators import perlin_generator
+# from generators import poisson_points_generator
+#from generators import grammary_generator
+from Controler.perlin_controler import perlin_generator
+from Controler.poisson_controler import poisson_points_generator
+from Controler.grammary_controler import grammary_generator
+
+
+from Utils.utils_functions import str_to_tab
 
 from threading import Thread
 import pathlib

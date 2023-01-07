@@ -1,3 +1,9 @@
+from Statistics import stats
+from World.Methods import grammar
+from Controler.seed_controler import process_grammar_seed
+from Utils.utils_functions import output_in_txt
+
+
 def grammary_generator(seed, file_path, input_data):
     print("input_data.get_water_percentage() = " + str(input_data.get_water_percentage()))
     print("input_data.get_beach_percentage() = " + str(input_data.get_beach_percentage()))
@@ -5,7 +11,7 @@ def grammary_generator(seed, file_path, input_data):
     print("input_data.get_mountain_percentage() = " + str(
         input_data.get_mountain_percentage()))
     print("processing seed")
-    seed_new = grammar.process_seed(str(seed))
+    seed_new = process_grammar_seed(str(seed))
     #print(seed_new)
     print("drawing map ...")
     G = grammar.draw(seed_new)  # Grammar.draw(seed)

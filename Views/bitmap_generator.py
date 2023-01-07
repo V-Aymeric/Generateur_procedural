@@ -1,8 +1,6 @@
 #import System.Drawing
 from PIL import Image
-from generators import caracters
 from Statistics.input_data import PercentageKeys as enumKeys
-from Statistics.input_data import keys_percentages as caracters
 from io import BytesIO
 from kivy.core.image import Image as CoreImage
 

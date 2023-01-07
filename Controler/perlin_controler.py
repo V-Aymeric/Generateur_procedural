@@ -1,10 +1,10 @@
 from Perlin import noise_plugin  #https://github.com/caseman/noise/blob/master/_perlin.c
 
-import stats
-from math import sqrt
+from Statistics import stats
 
 from Controler import seed_controler
 from World.Methods import perlin
+from Utils.utils_functions import output_in_txt
 
 
 def perlin_generator(seed, file_path, input_data):
