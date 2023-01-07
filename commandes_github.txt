@@ -1,0 +1,47 @@
+git config --global user.name V-Aymeric
+git config --global user.email viala.aymeric@gmail.com
+
+git init -b main
+git add main.py
+
+git commit -m "Test commit for the first file"
+git remote add origin https://github.com/V-Aymeric/Generator_procedural.git
+git push -u origin main
+
+
+
+
+---premier commit
+
+git init -b main
+git remote add origin https://github.com/V-Aymeric/Generator_procedural.git
+git pull https://github.com/V-Aymeric/Generator_procedural.git main
+git add main.py
+git commit -m "Test commit for the first file"
+git push -u origin main
+
+
+
+---commits suivants
+git add main.py
+git add generators.py
+git add grammar.py
+git add setup.py
+git add stats.py
+git add world_generation.py
+git add polynome.xlsx
+git add validation.xlsx
+
+git add Perlin/\*.py
+git add poisson/\*.py
+git add Statistics/\*.py
+git add Views/\*.py
+git add Views/kv/\*.kv
+git add World/\*.py
+
+git commit -m "Test commit for the first file"
+git push -u origin main
+
+
+
+
