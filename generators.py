@@ -20,31 +20,24 @@ def output_in_txt(arg_path, arg_str):
 def perlin_generator(seed, file_path, input_data):
     #https://github.com/caseman/noise/blob/master/_perlin.c
     coord_x, coord_y = noise_plugin.process_seed(int(seed))
+
+
     P = noise_plugin.calculate_perlin_values(coord_x, coord_y)
     P = noise_plugin.apply_circle_correction(P)
     statistiques = stats.perlin_stats(P)
 
-    #print("input_data.get_water_percentage() = " + str(input_data.get_water_percentage()))
-    #print("input_data.get_beach_percentage() = " + str(input_data.get_beach_percentage()))
-    #print("input_data.get_plain_percentage() = " + str(input_data.get_plain_percentage()))
-    #print("input_data.get_mountain_percentage() = " + str(
-    #    input_data.get_mountain_percentage()))
 
     data_slider = {
         "water": int(statistiques.get_val_at_percentage(
-            #input_data.percentages[keys_percentages[PercentageKeys.WATER]]) * 100
             input_data.get_water_percentage())*100
         ),  # 0,
         "beach": int(statistiques.get_val_at_percentage(
-            # input_data.percentages[keys_percentages[PercentageKeys.PLAINS]]) * 100
             input_data.get_beach_percentage()) * 100
         ),  # 25,
         "plains": int(statistiques.get_val_at_percentage(
-            #input_data.percentages[keys_percentages[PercentageKeys.PLAINS]]) * 100
             input_data.get_plain_percentage()) * 100
         ),  # 25,
         "mountain": int(statistiques.get_val_at_percentage(
-            #input_data.percentages[keys_percentages[PercentageKeys.MOUNTAIN]]) * 100
             input_data.get_mountain_percentage()) * 100
         )  # 1000 get_mountain_percentage
     }
