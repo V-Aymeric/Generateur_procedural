@@ -195,7 +195,6 @@ def draw(seed):
         for j in range(500):
             final_world[i].append(0)
 
-    #try :
     min_bli = 600
     for y in range(min_y, max_y + 1):
         for x in range(min_x, max_x + 1):
