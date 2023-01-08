@@ -1,6 +1,6 @@
 from World.world_point import WorldPoint
 
-WORLD_SIZE = 500
+from Utils.constansts import WORLD_SIZE
 
 
 class World:
@@ -14,9 +14,14 @@ class World:
     def get(self, x, y):
         return self.grid[x, y]
 
-    def set(self, x, y, point):
+    def set(self, x, y, point, is_point=False):
         if isinstance(point, WorldPoint):
+            # print("point ", x, " ", y, " is set with ", point.value)
             self.grid[x, y] = point
+        if isinstance(point, int) or isinstance(point, float):
+            # print("point ", x, " ", y, " is set with ", point)
+            self.grid[x, y].value = point
+            self.grid[x, y].is_point = is_point
 
     def add_new_world_value(self, x, y):
         self.grid[x, y] = WorldPoint()

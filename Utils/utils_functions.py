@@ -4,14 +4,6 @@ def output_in_txt(arg_path, arg_str):
     file.close()
 
 
-caracters = [
-        "˵",
-        "ᴖ",
-        "∩",
-        "▲",
-]
-
-
 def str_to_tab(s):
     s_lines = s.split("\n")
     y = 0

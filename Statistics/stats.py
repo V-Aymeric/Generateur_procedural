@@ -1,5 +1,7 @@
 import os, sys
 
+from Utils.constansts import WORLD_SIZE
+from Utils.constansts import WORLD_SIZE_RANGE
 
 class Statistiques:
 
@@ -48,9 +50,11 @@ class Statistiques:
 
 def perlin_stats(perlin):
     liste_valeurs = []
-    for i in perlin:
-        for j in i:
-            liste_valeurs.append(float(j))
+    for i in WORLD_SIZE_RANGE:
+        for j in WORLD_SIZE_RANGE:
+            liste_valeurs.append(float(perlin.get(i, j).value))
+
+    # get(x, y)
     tmp = sorted(liste_valeurs)
 
     valeur_max = max(liste_valeurs)

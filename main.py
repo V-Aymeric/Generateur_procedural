@@ -1,8 +1,6 @@
 from kivy.app import App
 from Views.views_manager import get_main_window
 
-taille_tableau = 500
-
 
 class MainApp(App):
     def build(self):

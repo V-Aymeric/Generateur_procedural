@@ -3,8 +3,10 @@ from Statistics import stats
 from Statistics.maths_functions import lambda_polynome
 
 from math import sqrt
-#from main import taille_tableau
 
+
+from Utils.constansts import WORLD_SIZE
+from Utils.constansts import WORLD_SIZE_RANGE
 taille_tableau = 500
 
 
@@ -24,7 +26,7 @@ def process_seed(seed):
     return int(coord_x), int(coord_y)
 
 
-def convert_values_to_string(P, data):
+def convert_values_to_string(world_data, data):
     perlin_lettres = [
         "˵",
         "ᴖ",
@@ -40,20 +42,21 @@ def convert_values_to_string(P, data):
     }
 
     s = ""
-    for P_row in P:
-        for P_data in P_row:
+    for x in WORLD_SIZE_RANGE:
+        for y in WORLD_SIZE_RANGE:
             # P_data = (P_data + 1) * 0.5 * 255
-            P_data = (P_data) * 100
+
+            value = world_data.get(x, y).value * 100
             tmp = "-"
             for lettre in perlin_lettres:
                 try:
-                    if P_data <= perlin_correspondance[lettre]:
+                    if value <= perlin_correspondance[lettre]:
                         tmp = lettre
                         break
                 except Exception:
                     pass
             if tmp == "-":
-                print("P_data = {0}  corresp = {1}".format(str(P_data), str(perlin_correspondance["▲"])))
+                print("P_data = {0}  corresp = {1}".format(str(value), str(perlin_correspondance["▲"])))
             s += tmp
         s += "\n"
 

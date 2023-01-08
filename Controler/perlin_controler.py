@@ -10,9 +10,12 @@ from Utils.utils_functions import output_in_txt
 def perlin_generator(seed, file_path, input_data):
     coord_x, coord_y = seed_controler.process_perlin_seed(int(seed))
 
-    P = perlin.calculate_perlin_values(coord_x, coord_y)
-    P = perlin.apply_circle_correction(P)
-    statistiques = stats.perlin_stats(P)
+    print("Calculate values")
+    world_data = perlin.calculate_perlin_values(coord_x, coord_y)
+    print("Apply circle correction")
+    world_data = perlin.apply_circle_correction(world_data)
+    print("Retrieving stats")
+    statistiques = stats.perlin_stats(world_data)
 
     data_slider = {
         "water": int(statistiques.get_val_at_percentage(
@@ -28,7 +31,9 @@ def perlin_generator(seed, file_path, input_data):
             input_data.get_mountain_percentage()) * 100
         )  # 1000 get_mountain_percentage
     }
-    s = noise_plugin.convert_values_to_string(P, data_slider)
+    print("Converting values to string")
+    s = noise_plugin.convert_values_to_string(world_data, data_slider)
+    print("Generating file")
     output_in_txt(file_path, s)
     print("Generation Perlin OK")
     return s
