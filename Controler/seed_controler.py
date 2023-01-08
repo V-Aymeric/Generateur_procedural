@@ -62,7 +62,7 @@ def process_grammar_seed(seed):
         new_seed += first_process_correspondance[letter]
     seed = new_seed
 
-    for i in range(3): #range(3):#range(4):#range(5):#range(3):
+    for i in range(1): #range(3):#range(4):#range(5):#range(3):
         new_seed = ""
         for letter in seed:
             if letter in ["[", "]"]:

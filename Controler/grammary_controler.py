@@ -10,6 +10,7 @@ def grammary_generator(seed, file_path, input_data):
     print("input_data.get_plain_percentage() = " + str(input_data.get_plain_percentage()))
     print("input_data.get_mountain_percentage() = " + str(
         input_data.get_mountain_percentage()))
+
     print("processing seed")
     seed_new = process_grammar_seed(str(seed))
     #print(seed_new)

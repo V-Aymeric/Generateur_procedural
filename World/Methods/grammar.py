@@ -3,8 +3,9 @@ from enum import IntEnum
 from math import sqrt
 
 #from stats import perlin_stats
+from World.world import World
 
-
+from Utils.constansts import WORLD_SIZE_RANGE
 class Directions(IntEnum):
     LEFT_UP = 0
     UP = 1
@@ -45,14 +46,16 @@ def draw(seed):
     world[i][j] = 1
 
     print("drawing the form")
+    print("seed length = ", len(seed))
+    print("seed  = ", seed)
     for index in range(len(seed)):
+        print("seed[", index, "] = ", seed[index])
         if seed[index] == "0":
             for v in range(2):
                 i += direction_matrix[direction][1]
                 j += direction_matrix[direction][0]
                 if i not in world.keys():
                     world[i] = {}
-                #world[i][j] = 1
                 world = paint_at(world, i, j, nb_max_branches, branch_index)
         elif seed[index] == "1":
             direction = (direction + 1) % 8
@@ -61,7 +64,6 @@ def draw(seed):
                 j += direction_matrix[direction][0]
                 if i not in world.keys():
                     world[i] = {}
-                #world[i][j] = 1
                 world = paint_at(world, i, j, nb_max_branches, branch_index)
         elif seed[index] == "2":
             direction = (direction - 1) % 8
@@ -70,7 +72,6 @@ def draw(seed):
                 j += direction_matrix[direction][0]
                 if i not in world.keys():
                     world[i] = {}
-                #world[i][j] = 1
                 world = paint_at(world, i, j, nb_max_branches, branch_index)
         elif seed[index] == "[":
             world, index, last_direction = branche(world, i, j, last_direction, index, seed, nb_max_branches, branch_index+1)
@@ -99,20 +100,18 @@ def draw(seed):
     origin_x = int((max_x + min_x) / 2)
     origin_y = int((max_y + min_y) / 2)
 
-    final_world = []
-    for i in range(500):
-        final_world.append([])
-        for j in range(500):
-            final_world[i].append(0)
+    final_world = World()
 
     min_bli = 600
     for y in range(min_y, max_y + 1):
         for x in range(min_x, max_x + 1):
             if x in world[y].keys():
                 bli = x + (origin - origin_x)
-                if bli < min_bli: min_bli = bli
+                if bli < min_bli:
+                    min_bli = bli
                 try:
-                    final_world[y + (origin - origin_y)][bli] = world[y][x]
+                    # final_world[y + (origin - origin_y)][bli] = world[y][x]
+                    final_world.set(bli, y + (origin - origin_y), world[y][x])
                 except Exception:
                     pass
                     #break
@@ -166,7 +165,7 @@ def paint_at(world, i, j, max_branch_index, branch_index):
     radiusA = 6
     radiusB = 20
     radiusC = 40
-    radiusD = 160 #80 #240
+    radiusD = 100 #160 #80 #240
 
     for y in range(-radiusD, radiusD + 1):
         #for x in range(-radiusD, radiusD + 1):
@@ -241,7 +240,7 @@ def branche(world, i, j, direction, index_seed, seed, max_branch_index, branch_i
                 world = paint_at(world, i, j, max_branch_index, branch_index)
 
 
-def to_str(G, data):
+def to_str(world_data, data):
     grammary_lettres = [
         "˵",
         "ᴖ",
@@ -257,12 +256,14 @@ def to_str(G, data):
     }
 
     s = ""
-    for G_row in G:
-        for G_data in G_row:
+    # for G_row in G:
+    #    for G_data in G_row:
+    for x in WORLD_SIZE_RANGE:
+        for y in WORLD_SIZE_RANGE:
             tmp = "-"
             for lettre in grammary_lettres:
                 try:
-                    if G_data <= grammary_correspondance[lettre]:
+                    if world_data.get(x, y).value <= grammary_correspondance[lettre]:
                         tmp = lettre
                         break
                 except Exception:

@@ -15,6 +15,8 @@ class World:
         return self.grid[x, y]
 
     def set(self, x, y, point, is_point=False):
+        if x < 0 or y < 0 or x >= WORLD_SIZE or y >= WORLD_SIZE:
+            return
         if isinstance(point, WorldPoint):
             # print("point ", x, " ", y, " is set with ", point.value)
             self.grid[x, y] = point
