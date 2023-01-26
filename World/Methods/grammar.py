@@ -150,7 +150,7 @@ def paint_at(world, i, j, max_branch_index, branch_index):
     """
 
     # Radius of differents dots
-    #if branch_index != 0:
+    # if branch_index != 0:
     #    if branch_index % 2 == 0:
     #        radiusA = int(6/int(branch_index/2))
     #        radiusB = int(20/int(branch_index/2))
@@ -167,8 +167,10 @@ def paint_at(world, i, j, max_branch_index, branch_index):
     radiusC = 40
     radiusD = 100 #160 #80 #240
 
+    branch_index_result = max_branch_index/(max_branch_index+branch_index)
+    branch_index_result_scaled = max_branch_index/(max_branch_index+(branch_index*100))
     for y in range(-radiusD, radiusD + 1):
-        #for x in range(-radiusD, radiusD + 1):
+        # for x in range(-radiusD, radiusD + 1):
         for x in range(-int(sqrt((radiusD*radiusD)-(y*y))), int(sqrt((radiusD*radiusD)-(y*y))) + 1):
             distance = sqrt((x * x) + (y * y))
             if i + y not in world.keys():
@@ -178,25 +180,26 @@ def paint_at(world, i, j, max_branch_index, branch_index):
 
             if radiusC < distance:
                 try:
-                    world[i + y][j + x] += (polynomeD(
-                        distance)*(max_branch_index/(max_branch_index+branch_index)))
+                    world[i + y][j + x] += \
+                        (polynomeD(distance)*branch_index_result)
                 except Exception:
                     pass
             elif radiusB < distance:
                 try:
-                    world[i + y][j + x] += (polynomeC(
-                        distance)*(max_branch_index/(max_branch_index+(branch_index*100))))
+                    world[i + y][j + x] += \
+                        (polynomeC(distance)*branch_index_result_scaled)
                 except Exception:
                     pass
             elif radiusA < distance:
                 try:
-                    world[i + y][j + x] += (polynomeB(
-                        distance)*(max_branch_index/(max_branch_index+(branch_index*100))))
+                    world[i + y][j + x] += \
+                        (polynomeB(distance)*branch_index_result_scaled)
                 except Exception:
                     pass
             else:
                 try:
-                    world[i + y][j + x] += (polynomeA(distance)*(max_branch_index/(max_branch_index+(branch_index*100))))
+                    world[i + y][j + x] += \
+                        (polynomeA(distance)*branch_index_result_scaled)
                 except Exception:
                     pass
 
@@ -218,7 +221,6 @@ def branche(world, i, j, direction, index_seed, seed, max_branch_index, branch_i
                 j += direction_matrix[direction][0]
                 if i not in world.keys():
                     world[i] = {}
-                #world[i][j] = 1
                 world = paint_at(world, i, j, max_branch_index, branch_index)
         elif seed[branch_index] == "1":
             direction = (direction + 1) % 8
@@ -227,7 +229,6 @@ def branche(world, i, j, direction, index_seed, seed, max_branch_index, branch_i
                 j += direction_matrix[direction][0]
                 if i not in world.keys():
                     world[i] = {}
-                #world[i][j] = 1
                 world = paint_at(world, i, j, max_branch_index, branch_index)
         elif seed[branch_index] == "2":
             direction = (direction - 1) % 8
@@ -236,7 +237,6 @@ def branche(world, i, j, direction, index_seed, seed, max_branch_index, branch_i
                 j += direction_matrix[direction][0]
                 if i not in world.keys():
                     world[i] = {}
-                #world[i][j] = 1
                 world = paint_at(world, i, j, max_branch_index, branch_index)
 
 

@@ -32,10 +32,13 @@ class LayerLabels(IntEnum):
 class WorldSettings:
     def __init__(self):
         self.layers = {}
+        self.add_layer(LayerLabels.ELEVATION, World())
+        self.add_layer(LayerLabels.HUMIDITY, World())
+        self.add_layer(LayerLabels.TEMPERATURE, World())
         self.humidity_thresholds = {}
         self.elevation_thresholds = {}
         self.temperature_thresholds = {}
-        self.world_points = []
+        self.world_points = World()
 
     def set_humidity_threshold(self, label, value):
         if not isinstance(label, HumidityLabels):
@@ -44,7 +47,6 @@ class WorldSettings:
         if not isinstance(value, int) and not isinstance(value, float):
             print("Wrong value passed")
             return
-
         self.humidity_thresholds[label] = value
 
     def set_elevation_threshold(self, label, value):
@@ -69,7 +71,9 @@ class WorldSettings:
         if not isinstance(point, WorldPoint):
             print("Wrong value passed")
             return
-        self.world_points.append(WorldPoint)
+        # self.world_points.append(WorldPoint)
+        # set_point
+        self.world_points.set_point(point.x, point.y)
 
     def get_humidity_percentage(self, label):
         return self.humidity_thresholds[label]
@@ -90,6 +94,11 @@ class WorldSettings:
         self.layers[layer_label] = layer
 
     def get_layer(self, layer_label):
+        """
+        Returns the layer specified
+        :param layer_label: The label for the layer
+        :return: A World object
+        """
         return self.layers[layer_label]
 
     def set_value_from_layer_at(self, layer_label, x, y, value):

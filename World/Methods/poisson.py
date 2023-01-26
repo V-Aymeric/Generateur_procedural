@@ -3,8 +3,13 @@ from math import sqrt
 from math import cos
 from math import sin
 
-from World.world import World
-from World.world import WORLD_SIZE
+# from World.world import World
+from World.world_settings import WorldSettings
+from World.world_settings import WorldPoint
+from World.world_settings import LayerLabels
+
+from Utils.constansts import WORLD_SIZE
+from Utils.constansts import WORLD_SIZE_RANGE
 # from poisson.queue import PoissonQueue
 # from poisson.point import PoissonPoint
 
@@ -27,12 +32,12 @@ def poisson_disc_sampling(seed):
     parent_y = int((seed % 1000) / 2)
     parent_x = int(((seed - parent_y) / 1000) / 2)
 
-    world = World()
+    world = WorldSettings() #World()
     queue = PoissonQueue()
 
     tmp_x = int(sha256(str(seed).encode('utf-8')).hexdigest(), base=16) % 500
     tmp_y = int(sha256(str(tmp_x).encode('utf-8')).hexdigest(), base=16) % 500
-    world.set_point(tmp_x, tmp_y)
+    world.get_layer(LayerLabels.ELEVATION).set_point(tmp_x, tmp_y)
     queue.add_coord_to_queue(tmp_x, tmp_y)
 
     nbr_of_points = 1
@@ -64,15 +69,16 @@ def poisson_disc_sampling(seed):
                 point = PoissonPoint(int(x), int(y))
 
                 j += 1
-                if poisson_check_if_not_in_range(world, point):
+                if poisson_check_if_not_in_range(world.world_points, point):
                     queue.add_to_queue(point)
-                    world.set_point(point.x, point.y)
+                    # world.get_layer(LayerLabels.ELEVATION).set_point(point.x, point.y)
+                    world.add_world_point(WorldPoint(is_point=True, x=x, y=y))
                     j = 0
                     nbr_of_points += 1
 
         queue.pop_first()
 
-    print (nbr_of_points)
+    print(nbr_of_points)
     return world
 
 
@@ -92,12 +98,23 @@ def poisson_check_if_not_in_range(world, point):
     return True
 
 
+def poisson_fortune_algoithm(world):
+    queue = PoissonQueue()
+
+    for y in WORLD_SIZE_RANGE:
+        for x in WORLD_SIZE_RANGE:
+            if world.world_points.is_point(x, y):
+                queue.add_to_queue(world.world_points.get(x, y))
+
+    # while not queue.is_empty():
+
+
 def poisson_to_str(world):
     s = ""
 
     for x in range(WORLD_SIZE):
         for y in range(WORLD_SIZE):
-            if world.is_point(x, y):
+            if world.world_points.is_point(x, y):
                 s += "▲"
             else:
                 s += "˵"
